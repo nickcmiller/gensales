@@ -24,4 +24,4 @@ def ask_with_search(prompt):
     result = self_ask_with_search.run(prompt)
     return result
     
-ask_with_search("Who is Ruobing Lu?")
+ask_with_search("")
