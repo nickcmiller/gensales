@@ -23,5 +23,3 @@ def ask_with_search(prompt):
     self_ask_with_search = initialize_agent(tools, llm, agent=AgentType.SELF_ASK_WITH_SEARCH, verbose=True)
     result = self_ask_with_search.run(prompt)
     return result
-    
-ask_with_search("")
