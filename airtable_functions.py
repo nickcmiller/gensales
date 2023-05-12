@@ -117,7 +117,7 @@ def process_record(base_id, table_name, record, fields, process_field, api_key=a
         #Iterate through every non-index field in the record
         for field in fields[1:]:
             field_key = field['name']
-            field_value = process_field(field_key)
+            field_value = process_field(field_key, record_name)
             new_fields[field_key]=field_value
 
         json_data = {
@@ -143,7 +143,7 @@ def process_record(base_id, table_name, record, fields, process_field, api_key=a
         # Handle any other unexpected errors
         print("Error: ", e)
 
-def iterate_through_records(base_id, table_name, fields, process_field, api_key=api_key):
+def iterate_through_records(base_id, table_name, fields, process_record, process_field, api_key=api_key):
     try:
         # Make the API request to get the first page of records
         url = f"https://api.airtable.com/v0/{base_id}/{table_name}"
