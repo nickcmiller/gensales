@@ -102,9 +102,9 @@ def get_fields(base_id, table_name, api_key=api_key):
 
 def process_record(base_id, table_name, record, fields, process_field, api_key=api_key):
     try:
-        
         record_id = record['id']
-        record_name = record['fields']['Name']
+        record_name = record['fields']['Record Name']
+        print(record['fields'])
 
         url = f"https://api.airtable.com/v0/{base_id}/{table_name}/{record_id}"
         headers = {
@@ -118,11 +118,13 @@ def process_record(base_id, table_name, record, fields, process_field, api_key=a
         for field in fields[1:]:
             field_key = field['name']
             field_value = record['fields'].get(field_key)  # Get the field value or None if it doesn't exist
-
-            if field_value is None or field_value == "":
-                # Process the non-empty field
-                processed_value = process_field(field_key, record_name)
-                new_fields[field_key] = processed_value
+            if type(field_value) is str: 
+                if field_value is None or field_value.isspace():
+                    # Process the non-empty field
+                    processed_value = process_field(field_key, record_name)
+                    new_fields[field_key] = processed_value
+            else:
+                print(field_key, " is not a string and won't be processed")
 
         json_data = {
             "fields": new_fields
