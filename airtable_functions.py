@@ -178,10 +178,10 @@ def iterate_through_records(base_id, table_name, fields, process_record, process
                 process_record(base_id, table_name, record, fields, process_field)
     except requests.exceptions.RequestException as e:
         # Handle any HTTP errors or network-related errors
-        print("Error: ", e)
+        print("HTTP or Network Error: ", e)
     except KeyError as e:
         # Handle any errors related to missing or incorrect data keys
-        print("Error: ", e)
+        print("Data Key Error: ", e)
     except Exception as e:
         # Handle any other unexpected errors
-        print("Error: ", e)
+        print("Unexpected Error: ", e)
